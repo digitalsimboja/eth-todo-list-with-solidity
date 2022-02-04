@@ -19,6 +19,7 @@ contract TodoList {
     // hold the tasks
 
     mapping(uint => Task) public tasks;
+
     event TaskCreated (
         uint id,
         string content,
@@ -30,7 +31,7 @@ contract TodoList {
         bool completed
     );
 
-    // We need a default task which is to be created upon the initial\
+    // We need a default task which is to be created upon the initial
     // deployment of the contract. The Solidity language provides a function
     // call Constructor which is run for the first time when the contract is 
     // deployed
