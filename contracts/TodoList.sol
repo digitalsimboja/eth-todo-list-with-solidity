@@ -19,6 +19,11 @@ contract TodoList {
     // hold the tasks
 
     mapping(uint => Task) public tasks;
+    event TaskCreated (
+        uint id,
+        string content,
+        bool completed
+    );
 
     // We need a default task which is to be created upon the initial\
     // deployment of the contract. The Solidity language provides a function
@@ -36,6 +41,9 @@ contract TodoList {
         // the key is an `uint` and the value is a form of `Task` or new Task
         // so we map the tasks to new task created which is to be stored on the 
         // Blockchain
-        tasks[taskCount] = Task(taskCount, _content, false);        
+        tasks[taskCount] = Task(taskCount, _content, false);  
+
+        // if a task is successfully created, let the client know by emitting an event
+        emit TaskCreated(taskCount, _content, false);      
     }
 }
