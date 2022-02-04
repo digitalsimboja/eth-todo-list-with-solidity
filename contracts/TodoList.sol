@@ -25,6 +25,11 @@ contract TodoList {
         bool completed
     );
 
+    event TaskCompleted(
+        uint id,
+        bool completed
+    );
+
     // We need a default task which is to be created upon the initial\
     // deployment of the contract. The Solidity language provides a function
     // call Constructor which is run for the first time when the contract is 
@@ -45,5 +50,12 @@ contract TodoList {
 
         // if a task is successfully created, let the client know by emitting an event
         emit TaskCreated(taskCount, _content, false);      
+    }
+
+    function toggleCompleted(uint _id) public {
+        Task memory _task = tasks[_id];
+        _task.completed = !_task.completed;
+        tasks[_id] = _task;
+        emit TaskCompleted(_id, _task.completed);
     }
 }
